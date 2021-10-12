@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=m, initial-scale=1.0">
+    <title>ReactJS</title>
+</head>
+<body>
+    <h1>Reactjs rên F8</h1>
+    <h2>createElement()</h2>
+    <ul>
+        <li>document.createElement() -> DOM Element</li>
+        <pre>
+        const h1Dom = document.createElement('h1');
+        h1Dom.title = 'Hello';
+        h1Dom.className = 'heading';
+        h1Dom.innerText = 'Hello guys DOM'
+        document.body.appendChild(h1Dom)
+        </pre>
+        <p>Vi du 2</p>
+        <pre>
+        const h1React = React.createElement('h1', {
+            title: 'Hello',
+            className: 'heading'
+        }, 'Hello guys Reactjs')
+
+        const ulDom = document.createElement('ul');
+        const liDom1 = document.createElement('li');
+        const liDom2 = document.createElement('li');
+        
+        liDom1.innerText = 'javascript'
+        liDom2.innerText = 'Reactjs'
+
+        ulDom.appendChild(liDom1)
+        ulDom.appendChild(liDom2)
+
+        document.body.appendChild(ulDom)
+        </pre>
+        <li>React.createElement() -> React Element</li>
+        <p><b>
+            React.createElement(type, props, children, children n...)
+        </b></p>
+        <pre>
+        const h1React = React.createElement('h1', {
+            title: 'Hello',
+            className: 'heading'
+        }, 'Hello guys Reactjs')
+        </pre>
+        <p>Vi du 2</p>
+        <pre>
+        const ulReact = React.createElement(
+            'ul',
+            null,
+            React.createElement('li', null, 'javascript'),
+            React.createElement('li', null, 'reactjs')
+            )
+        console.log(ulReact)
+        </pre>
+    </ul>
+    <h2>ReactDOM</h2>
+    <pre>
+        const rootDOM = document.getElementById('root')
+        ReactDOM.render(divReact, rootDOM)
+    </pre>
+    <h2>JSX va babel</h2>
+    <h2>React.createElement: nhan string, function/class</h2>
+        <h3>function</h3>
+        <pre>
+            function Header(){
+                return (
+                    &lt;li>heading&lt;/li>
+                )
+            }
+
+            const app = (
+                &lt;React.Fragment>
+                &lt;Header>&lt;/Header>
+                &lt;/React.Fragment>
+            )
+
+            ReactDOM.render(app, document.getElementById('root'))
+        </pre>
+        <h3>
+            <pre>
+                class Content extends React.Component {
+                    render() {
+                        return (
+                            &lt;li>content&lt;/li>
+                        )
+                    }
+                }
+            </pre>
+        </h3>
+
+
+
+
+</body>
+</html>
