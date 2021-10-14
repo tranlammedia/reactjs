@@ -81,20 +81,210 @@
 
             ReactDOM.render(app, document.getElementById('root'))
         </pre>
-        <h3>
-            <pre>
-                class Content extends React.Component {
-                    render() {
-                        return (
-                            &lt;li>content&lt;/li>
-                        )
-                    }
-                }
-            </pre>
+        <h3> class
         </h3>
+        <pre>
+            class Content extends React.Component {
+                render() {
+                    return (
+                        &lt;li>content&lt;/li>
+                    )
+                }
+            }
+        </pre>
+    <h2>Tuân thủ quy tắc tên component</h2>
+        <p>viết HOA chữ đầu</p>
+        <pre>
+            const type = 'Checkbox'
+            const Component = Form[type]
+        </pre>
+        <p>Ví dụ</p>
+        <pre>
+            const Form = {
+                Input() {
+                    return (
+                        &lt;input />
+                    )
+                },
+                Checkbox() {
+                    return (
+                        &lt;input type="checkbox" />
+                    )
+                }
+            }
+    
+            // App.js
+            function App() {
+                const type = 'Checkbox'
+                const Component = Form[type]
+                return (
+                    &lt;React.Fragment>
+                        &lt;Component />
+                    &lt;/React.Fragment>
+                )    
+            }
+        </pre>
+        <p>Ví dụ 2</p>
+        <pre>
+            function Button({ title, href, onClick }) {
+                let Component = 'button'
+                const props = {}
+    
+                if (onClick) {
+                    props.onClick = onClick
+                }
+    
+                if (href) {
+                    Component = 'a'
+                    props.href = href
+                }
+                return (
+                    &lt;Component {...props}>{title} &lt;/Component>
+                )
+            }
+    
+            // App.js
+            function App() {
+                return (
+                    &lt;Button 
+                        title="Click me"
+                        href="https://fullstack.edu.vn/"
+                        // onClick={() => console.log(Math.random())}
+                    />
+                )    
+            }
+        </pre>
+        <p>Ví dụ 3 &&</p>
+        <pre>
+            function App() {
+                let boolean =false
+                return (
+                    &lt;div>
+                        {boolean && &lt;h2>Chao mung den F8&lt;/h2>}
+                    &lt;/div>
+                )    
+            }
+        </pre>
+        <p>Ví dụ 4 OR ||</p>
+        <pre>
+            function App({ title }) {
+                let boolean =false
+                return (
+                    &lt;div>
+                        {&lt;h3>{title}&lt;/h3> || &lt;h2>Chao mung den F8&lt;/h2>}
+                    &lt;/div>
+                )    
+            }
+        </pre>
+    <h2>props</h2>
+        <h3>propName1="string literals"</h3>
+        <h3>propName2={expression}</h3>
+        <h3>props default to true</h3>
+        <pre>
+            &lt;Button 
+                primary
+                title='click me'
+                href="https://fullstack.edu.vn/"
+                onClick={() => console.log(Math.random())}
+            />
+            ---
+            primary -> true
+        </pre>
+        <h3>spread/rest props</h3>
+        <pre>
+            function Input({label, ...inputProps}) { // spread lấy phần còn lại
+                return (
+                    &lt;div>
+                        &lt;label>{label}&lt;/label>
+                        &lt;input {...inputProps}>&lt;/input> // rest giải nén ra
+                    &lt;/div>
+                )
+            }
 
-
-
-
+            // App.js
+            function App() {
+                return (
+                    &lt;React.Fragment>
+                        &lt;Input 
+                            label="Email"
+                            type="checkbox"
+                            onFocus={() => console.log(Math.random())}
+                            placeholder="nhap email"
+                        />
+                    &lt;/React.Fragment>
+                )
+            }
+        </pre>
+        <h3>children props</h3>
+        <p>&lt;Component>string literals&lt;/Component></p>
+        <pre>
+            function Button({ children }) {
+                return (
+                    &lt;button>{children}&lt;/button>
+                )
+            }
+            // App.js
+            function App() {
+                return (
+                    &lt;React.Fragment>
+                        &lt;Button >Click me!&lt;/Button>
+                    &lt;/React.Fragment>
+                )
+            }
+        </pre>
+        <p>&lt;Component>{expression}&lt;/Component></p>
+        <pre>
+            function App() {
+                return (
+                    &lt;React.Fragment>
+                        &lt;Button >{false || 'click me'}&lt;/Button>
+                    &lt;/React.Fragment>
+                )
+            }
+        </pre>
+        <h3>render props</h3>
+        <p>Cách 1</p>
+        <pre>
+            function List({ data, children }) {
+                console.log(children)
+                return (
+                    &lt;ul>
+                        {data.map((i, index) => children(i, index))}
+                        ---
+                        {data.map((...props) => children(...props))}
+                    &lt;/ul>
+                )
+            }
+            // App.js
+            function App() {
+                const cars = ['BMW', 'Honda', 'Mazda']
+                return (
+                    &lt;div>
+                        &lt;List data={cars}>
+                            {(item, index) => &lt;li className='item' key={index}>{item}&lt;/li>}
+                        &lt;/List>
+                    &lt;/div>
+                )
+            }
+        </pre>
+        <p>Cách 2</p>
+        <pre>
+            function List({ data }) {
+                return (
+                    &lt;ul>
+                        {data.map((item) => &lt;li className='item'>{item}&lt;/li>)}
+                    &lt;/ul>
+                )
+            }
+            // App.js
+            function App() {
+                const cars = ['BMW', 'Honda', 'Mazda']
+                return (
+                    &lt;div>
+                        &lt;List data={cars} />
+                    &lt;/div>
+                )
+            }
+        </pre>
 </body>
 </html>
